@@ -17,6 +17,22 @@ class UserPolicy < ApplicationPolicy
   end
 
   def discover?
-    feed?
+    feed? # true
+  end
+
+  def create?
+    discover? # true
+  end
+
+  def edit?
+    user == current_user
+  end
+
+  def update?
+    edit? # user = current_user
+  end
+
+  def destroy?
+    update? # user = current_user
   end
 end

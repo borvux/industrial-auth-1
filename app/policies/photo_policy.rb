@@ -14,4 +14,22 @@ class PhotoPolicy < ApplicationPolicy
       !photo.owner.private? ||
       photo.owner.followers.include?(user)
   end
+
+  def create?
+    # anybody can create photos hence true
+    true
+  end
+
+  def edit?
+    # if the user is the photo owner, you can edit 
+    user == current_user
+  end
+
+  def update?
+    edit?
+  end
+
+  def destroy?
+    update?
+  end
 end
